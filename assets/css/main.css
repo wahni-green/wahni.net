@@ -733,6 +733,26 @@ h6 {
   opacity: 1;
 }
 
+.whatsapp-float {
+  width: 40px;
+  height: 40px;
+  background-color: #25d366;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 25px;
+  line-height: 40px;
+  z-index: 1000;
+  margin-bottom: 5rem;
+  transition: none; 
+}
+
+.whatsapp-float:hover {
+  background-color: #1ebe5d;
+  text-decoration: none;
+}
+
+
 /*--------------------------------------------------------------
 # Disable aos animation delay on mobile devices
 --------------------------------------------------------------*/
