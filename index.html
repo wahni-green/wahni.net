@@ -76,19 +76,47 @@
 
   <main class="main">
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero section light-background">
+<!-- Hero Section -->
+<section id="hero" class="hero section light-background">
 
-      <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
-            <h1>Welcome to <span>Wahni IT Solutions</span></h1>
+   <div class="contraner">
+      <div class="row gy-4">
+         <div class="col-lg-8 d-flex flex-column justify-content-center" data-aos="zoom-out">
+            <h1>Best <span>ERP software </br></span> in Bangalore</h1>
             <p>Frappe Certified Partner</p>
-          </div>
-        </div>
+         </div>
+
+         <!-- Contact Form Column (30%) -->
+         <div class="col-lg-3">
+            <form class="contact-form p-4 rounded shadow" id="contactForm1" onsubmit="submitForm">
+               <div class="mb-2">
+                  <label for="name" class="form-label">Name</label>
+                  <input type="text" id="name" class="form-control" required>
+               </div>
+               <div class="mb-2">
+                  <label for="organization" class="form-label">Organization</label>
+                  <input type="text" id="organization" class="form-control" >
+               </div>
+               <div class="mb-2">
+                  <label for="email" class="form-label">E-Mail</label>
+                  <input type="email" id="email" class="form-control" required>
+               </div>
+               <div class="mb-2">
+                  <label for="phone" class="form-label">Phone</label>
+                  <input type="tel" id="phone" class="form-control" required>
+               </div>
+               <div class="mb-2">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea id="description" class="form-control" rows="3"></textarea>
+               </div>
+               <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </form>
+         </div>
       </div>
 
-    </section><!-- /Hero Section -->
+   </div>
+</section>
+<!-- /Hero Section -->
 
     <!-- Featured Services Section -->
     <section id="featured-services" class="featured-services section">
@@ -522,11 +550,17 @@
 <!-- Form Submit -->
 <script>
   const contactFormElm = document.querySelector('#contactForm');
+  const contactFormElm1 = document.querySelector('#contactForm1');
   const formErrorModal = new bootstrap.Modal('#form-error-modal');
 
   function getValueOfElmById(id) {
     return document.getElementById(id).value || undefined;
   }
+
+  contactFormElm1.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitForm();
+  });
 
   contactFormElm.addEventListener('submit', async (e) => {
     e.preventDefault();
