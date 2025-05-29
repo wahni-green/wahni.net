@@ -88,7 +88,7 @@
 
          <!-- Contact Form Column (30%) -->
          <div class="col-lg-3">
-            <form class="contact-form p-4 rounded shadow" id="contactForm1" onsubmit="submitForm">
+          <form class="contact-form p-4 rounded shadow" id="contactForm1">
                <div class="mb-2">
                   <label for="name" class="form-label">Name</label>
                   <input type="text" id="name" class="form-control" required>
@@ -109,7 +109,7 @@
                   <label for="description" class="form-label">Description</label>
                   <textarea id="description" class="form-control" rows="3"></textarea>
                </div>
-               <button type="submit" class="btn btn-primary w-100">Submit</button>
+              <button type="submit" class="btn btn-primary w-100">Submit</button>
             </form>
          </div>
       </div>
@@ -553,36 +553,36 @@
   const contactFormElm1 = document.querySelector('#contactForm1');
   const formErrorModal = new bootstrap.Modal('#form-error-modal');
 
-  function getValueOfElmById(id) {
-    return document.getElementById(id).value || undefined;
+  function getFormValue(form, selector) {
+    const el = form.querySelector(selector);
+    return el ? el.value : undefined;
   }
-
+  
   contactFormElm1.addEventListener('submit', async (e) => {
     e.preventDefault();
-    submitForm();
+    submitForm(contactFormElm1);
   });
-
+  
   contactFormElm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    submitForm();
+    submitForm(contactFormElm);
   });
-
-  function submitForm() {
+  
+  function submitForm(form) {
     grecaptcha.ready(function () {
       grecaptcha
-        .execute('6Ld-QI0iAAAAAPW9CwclXHZYoX0H0QQLhqTuc2iQ', {
-          action: 'submit',
-        })
+        .execute('6Ld-QI0iAAAAAPW9CwclXHZYoX0H0QQLhqTuc2iQ', { action: 'submit' })
         .then(async function (token) {
           const data = {
-            name: getValueOfElmById('form-name'),
-            email: getValueOfElmById('form-email'),
-            phone: getValueOfElmById('form-phone'),
-            organization: getValueOfElmById('form-organization'),
+            name: getFormValue(form, 'input[id$="name"]'),
+            email: getFormValue(form, 'input[id$="email"]'),
+            phone: getFormValue(form, 'input[id$="phone"]'),
+            organization: getFormValue(form, 'input[id$="organization"]'),
+            message: getFormValue(form, 'textarea'),
             source: 'Website - India',
             token: token,
           };
-          console.log(data,"data");
+
           let responseData;
           
           try {
@@ -597,13 +597,10 @@
             responseData = await response.json();
 
             if (!(await responseData)) {
-              console.log(responseData,"!");
               formErrorModal.show();
             }
 
             if (!(await responseData.message.success)) {
-              console.log(responseData,"responseData");
-              
               formErrorModal.show();
             }
 
