@@ -568,8 +568,6 @@
   });
 
   function submitForm() {
-    console.log("submitFormsubmitForm");
-    
     grecaptcha.ready(function () {
       grecaptcha
         .execute('6Ld-QI0iAAAAAPW9CwclXHZYoX0H0QQLhqTuc2iQ', {
@@ -584,6 +582,7 @@
             source: 'Website - India',
             token: token,
           };
+          console.log(data,"data");
           let responseData;
           
           try {
@@ -598,14 +597,17 @@
             responseData = await response.json();
 
             if (!(await responseData)) {
+              console.log(responseData,"!");
               formErrorModal.show();
             }
 
             if (!(await responseData.message.success)) {
+              console.log(responseData,"responseData");
+              
               formErrorModal.show();
             }
 
-            window.location.href = 'https://erp-bangalore.wahni.io/form-submit-success.html';
+            window.location.href = 'https://wahni.net/form-submit-success.html';
           } catch (error) {
             if (!responseData) {
               formErrorModal.show();
